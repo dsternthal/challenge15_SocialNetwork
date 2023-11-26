@@ -1,28 +1,28 @@
 const router = require('express').Router();
 const {
-  getApplications,
-  getSingleApplication,
-  createApplication,
-  updateApplication,
-  deleteApplication,
-  addTag,
-  removeTag,
-} = require('../../controllers/appController');
+  getThoughts,
+  getSingleThought,
+  createThought,
+  updateThought,
+  deleteThought,
+  addReactions,
+  removeReactions,
+} = require('../../controllers/thoughtController');
 
-// /api/applications
-router.route('/').get(getApplications).post(createApplication);
+// /api/Thoughts
+router.route('/').get(getThoughts).post(createThought);
 
-// /api/applications/:applicationId
+// /api/Thoughts/:ThoughtId
 router
-  .route('/:applicationId')
-  .get(getSingleApplication)
-  .put(updateApplication)
-  .delete(deleteApplication);
+  .route('/:ThoughtId')
+  .get(getSingleThought)
+  .put(updateThought)
+  .delete(deleteThought);
 
-// /api/applications/:applicationId/tags
-router.route('/:applicationId/tags').post(addTag);
+// /api/Thoughts/:ThoughtId/tags
+router.route('/:ThoughtId/reactions').post(addReactions);
 
-// /api/applications/:applicationId/tags/:tagId
-router.route('/:applicationId/tags/:tagId').delete(removeTag);
+// /api/Thoughts/:ThoughtId/tags/:tagId
+router.route('/:ThoughtId/reactions/:reactionId').delete(removeReactions);
 
 module.exports = router;
