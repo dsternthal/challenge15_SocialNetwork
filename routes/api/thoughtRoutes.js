@@ -14,13 +14,13 @@ router.route('/').get(getThoughts).post(createThought);
 
 // /api/Thoughts/:ThoughtId
 router
-  .route('/:ThoughtId')
+  .route('/:thoughtId')
   .get(getSingleThought)
   .put(updateThought)
   .delete(deleteThought);
 
-// /api/Thoughts/:ThoughtId/tags
-router.route('/:ThoughtId/reactions').post(addReactions);
+// /api/thoughts/:ThoughtId/reactions
+router.route('/:thoughtId/reactions').post(addReactions);
 
 // /api/Thoughts/:ThoughtId/tags/:tagId
 router.route('/:ThoughtId/reactions/:reactionId').delete(removeReactions);
