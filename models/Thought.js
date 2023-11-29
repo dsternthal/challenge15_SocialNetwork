@@ -17,7 +17,7 @@ const thoughtSchema = new Schema(
       //format date as MM/DD/YYYY
       get:(newDate)=>newDate.toLocaleDateString()
     },
-    udername: {
+    username: {
       type: String,
       required: true,
     },

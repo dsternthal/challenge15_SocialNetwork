@@ -33,7 +33,7 @@ module.exports = {
       const thought = await Thought.create(req.body);
       const user = await User.findOneAndUpdate(
         { _id: req.body.userId },
-        { $addToSet: { Thoughts: thought._id } },
+        { $addToSet: { thoughts: thought } },
         { new: true }
       );
 
@@ -72,15 +72,15 @@ module.exports = {
   // Then if the app exists, we look for any users associated with the app based on he app ID and update the Thoughts array for the User.
   async deleteThought(req, res) {
     try {
-      const Thought = await Thought.findOneAndRemove({ _id: req.params.ThoughtId });
+      const Thought = await Thought.findOneAndRemove({ _id: req.params.thoughtId });
 
       if (!Thought) {
         return res.status(404).json({ message: 'No Thought with this id!' });
       }
 
       const user = await User.findOneAndUpdate(
-        { Thoughts: req.params.ThoughtId },
-        { $pull: { Thoughts: req.params.ThoughtId } },
+        { _id: req.body.userId },
+        { $pull: { Thoughts: req.params.thoughtId } },
         { new: true }
       );
 
@@ -99,16 +99,16 @@ module.exports = {
   async addReactions(req, res) {
     try {
       const thought = await Thought.findOneAndUpdate(
-        { _id: req.params.ThoughtId },
+        { _id: req.params.thoughtId },
         { $addToSet: { reactions: req.body } },
         { runValidators: true, new: true }
       );
 
-      if (!Thought) {
+      if (!thought) {
         return res.status(404).json({ message: 'No Thought with this id!' });
       }
 
-      res.json(Thought);
+      res.json(thought);
     } catch (err) {
       res.status(500).json(err);
     }
